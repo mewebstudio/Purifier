@@ -1,0 +1,26 @@
+{
+    "name": "mews/purifier",
+    "description": "HTMLPurifier Package for Laravel 4",
+    "keywords": ["L4", "Laravel 4", "Laravel", "HTMLPurifier", "Purifier"],
+    "homepage": "http://github.com/mewebstudio/Purifier",
+    "license": "LGPL",
+    "authors": [
+        {
+            "name": "Muharrem ERIN",
+            "email": "me@mewebstudio.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.x"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Mews\\Purifier": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
