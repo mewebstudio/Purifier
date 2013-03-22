@@ -34,10 +34,10 @@ Find the `providers` key in `app/config/app.php` and register the HTMLPurifier S
     )
 ```
 
-Find the `aliases` key in `app/config/app.php` and register the HTMLPurifier Service Provider.
+Find the `aliases` key in `app/config/app.php`.
 
 ```php
-    'providers' => array(
+    'aliases' => array(
         // ...
         'Purifier' => 'Mews\Purifier\Facades\Purifier',
     )
