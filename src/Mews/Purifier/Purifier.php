@@ -47,8 +47,7 @@ class Purifier {
         {
             if ( ! class_exists('HTMLPurifier_Config', false))
             {
-                $preload = Config::get('purifier.preload') ? Config::get('purifier.preload') : Config::get('purifier::preload');
-                if ($preload)
+                if (Config::get('purifier::preload'))
                 {
                     // Load the all of HTML Purifier right now.
                     // This increases performance with a slight hit to memory usage.
@@ -62,19 +61,16 @@ class Purifier {
             // Create a new configuration object
             $config = HTMLPurifier_Config::createDefault();
 
-            // Allow configuration to be modified
-            $finalize = Config::get('purifier.finalize') ? Config::get('purifier.finalize') : Config::get('purifier::finalize');
-            if ( ! $finalize)
+            if ( ! Config::get('purifier::finalize'))
             {
+                // Allow configuration to be modified
                 $config->autoFinalize = false;
             }
 
             // Use the same character set as Laravel
-            $encoding = Config::get('purifier.encoding') ? Config::get('purifier.encoding') : Config::get('purifier::encoding');
-            $config->set('Core.Encoding', $encoding);
+            $config->set('Core.Encoding', Config::get('purifier::encoding'));
 
-            $settings = Config::get('purifier.settings') ? Config::get('purifier.settings') : Config::get('purifier::settings');
-            if (is_array($settings))
+            if (is_array($settings = Config::get('purifier::settings')))
             {
                 // Load the settings
                 $config->loadArray($settings);
