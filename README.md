@@ -51,8 +51,17 @@ Find the `aliases` key in `app/config/app.php`.
 
 ```
 
-^_^                         
-
+## Configuration
+To configure Purifier directly in Laravel create the file `app/config/purifier.php` and add your settings.
+```php
+return array(
+    "settings" => array(
+        "HTML.SafeIframe" => 'true',
+        "URI.SafeIframeRegexp" => "%^(http://|https://|//)(www.youtube.com/embed/|player.vimeo.com/video/)%",
+    ),
+);
+```
+                      
 
 ## Links
 
