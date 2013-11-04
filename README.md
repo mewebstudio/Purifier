@@ -56,8 +56,10 @@ To configure Purifier directly in Laravel create the file `app/config/purifier.p
 ```php
 return array(
     "settings" => array(
-        "HTML.SafeIframe" => 'true',
-        "URI.SafeIframeRegexp" => "%^(http://|https://|//)(www.youtube.com/embed/|player.vimeo.com/video/)%",
+        "default" => array(
+            "HTML.SafeIframe" => 'true',
+            "URI.SafeIframeRegexp" => "%^(http://|https://|//)(www.youtube.com/embed/|player.vimeo.com/video/)%",
+        ),
     ),
 );
 ```
