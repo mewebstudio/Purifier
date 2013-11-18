@@ -57,11 +57,11 @@ class Purifier {
                 {
                     // Load the all of HTML Purifier right now.
                     // This increases performance with a slight hit to memory usage.
-                    require dirname(__FILE__) . '/lib/HTMLPurifier.includes.php';
+                    require base_path('vendor/ezyang/htmlpurifier/library/') . 'HTMLPurifier.includes.php';
                 }
 
                 // Load the HTML Purifier auto loader
-                require dirname(__FILE__) . '/lib/HTMLPurifier.auto.php';
+                require base_path('vendor/ezyang/htmlpurifier/library/') . 'HTMLPurifier.auto.php';
             }
 
             // Create a new configuration object

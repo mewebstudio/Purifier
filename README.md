@@ -5,13 +5,14 @@ A simple [Laravel 4](http://four.laravel.com/) service provider for including th
 ## Installation
 
 The HTMLPurifier Service Provider can be installed via [Composer](http://getcomposer.org) by requiring the
-`mews/purifier` package and setting the `minimum-stability` to `dev` (required for Laravel 4) in your
+`ezyang/htmlpurifier`, `mews/purifier` package and setting the `minimum-stability` to `dev` (required for Laravel 4) in your
 project's `composer.json`.
 
 ```json
 {
     "require": {
         "laravel/framework": "4.0.*",
+        "ezyang/htmlpurifier": "dev-master",
         "mews/purifier": "dev-master"
     },
     "minimum-stability": "dev"
@@ -43,14 +44,6 @@ Find the `aliases` key in `app/config/app.php`.
     )
 ```
 
-## Example
-
-```php
-
-    Purifier::clean(Input::get('inputname'));
-
-```
-
 ## Configuration
 To configure Purifier directly in Laravel create the file `app/config/purifier.php` and add your settings.
 ```php
@@ -60,9 +53,30 @@ return array(
             "HTML.SafeIframe" => 'true',
             "URI.SafeIframeRegexp" => "%^(http://|https://|//)(www.youtube.com/embed/|player.vimeo.com/video/)%",
         ),
+        "titles" => array(
+            'AutoFormat.AutoParagraph' => false,
+            'AutoFormat.Linkify' => false,
+        )
     ),
 );
 ```
+
+## Example
+
+default
+```php
+
+    Purifier::clean(Input::get('inputname'));
+
+```
+
+dynamic config
+```php
+
+    Purifier::clean('This is my H1 title', 'titles');
+    Purifier::clean('This is my H1 title', array('Attr.EnableID' => true));
+```
+
                       
 
 ## Links
