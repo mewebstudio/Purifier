@@ -52,8 +52,7 @@ class Purifier {
         {
             if ( ! class_exists('HTMLPurifier_Config', false))
             {
-                $preload = Config::get('purifier.preload') ? Config::get('purifier.preload') : Config::get('purifier::preload');
-                if ($preload)
+                if (Config::get('purifier::config.preload'))
                 {
                     // Load the all of HTML Purifier right now.
                     // This increases performance with a slight hit to memory usage.
@@ -68,21 +67,18 @@ class Purifier {
             $config = HTMLPurifier_Config::createDefault();
 
             // Allow configuration to be modified
-            $finalize = Config::get('purifier.finalize') ? Config::get('purifier.finalize') : Config::get('purifier::finalize');
-            if ( ! $finalize)
+            if ( ! Config::get('purifier::config.finalize'))
             {
                 $config->autoFinalize = false;
             }
 
             // Use the same character set as Laravel
-            $encoding = Config::get('purifier.encoding') ? Config::get('purifier.encoding') : Config::get('purifier::encoding');
-            $config->set('Core.Encoding', $encoding);
+            $config->set('Core.Encoding', Config::get('purifier::config.encoding'));
 
-            $settings = Config::get('purifier.settings.default') ? Config::get('purifier.settings.default') : Config::get('purifier::settings.default');
-            if (is_array($settings))
+            if (is_array(Config::get('purifier::config.settings.default')))
             {
                 // Load the settings
-                $config->loadArray($settings);
+                $config->loadArray(Config::get('purifier::config.settings.default'));
             }
 
             // Configure additional options
@@ -146,7 +142,7 @@ class Purifier {
                     $c = Purifier::$configs[$config];
                 } else {
                     $c = HTMLPurifier_Config::inherit(Purifier::$configs['default']);
-                    $c->loadArray(Config::get('purifier.settings.' . $config) ? Config::get('purifier.settings.' . $config) : Config::get('purifier::settings.' . $config));
+                    $c->loadArray(Config::get('purifier::config.settings.' . $config));
                     Purifier::$configs[$config] = $c;
                 }
 

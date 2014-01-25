@@ -44,7 +44,13 @@ Find the `aliases` key in `app/config/app.php`.
 ```
 
 ## Configuration
-To configure Purifier directly in Laravel create the file `app/config/purifier.php` and add your settings.
+
+To use your own settings, publish config.
+
+```$ php artisan config:publish mews/purifier```
+
+Config file `app/config/packages/mews/purifier/config.php`
+
 ```php
 return array(
     "settings" => array(
