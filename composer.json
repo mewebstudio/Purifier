@@ -12,7 +12,8 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "illuminate/support": "4.*"
+        "illuminate/support": "4.*",
+        "ezyang/htmlpurifier": "dev-master",
     },
     "autoload": {
         "psr-0": {
