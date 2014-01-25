@@ -11,8 +11,7 @@ project's `composer.json`.
 ```json
 {
     "require": {
-        "laravel/framework": "4.0.*",
-        "ezyang/htmlpurifier": "dev-master",
+        "laravel/framework": "4.0.*"
         "mews/purifier": "dev-master"
     },
     "minimum-stability": "dev"
