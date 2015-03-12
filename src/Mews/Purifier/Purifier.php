@@ -74,6 +74,7 @@ class Purifier {
 
             // Use the same character set as Laravel
             $config->set('Core.Encoding', Config::get('purifier::config.encoding'));
+            $config->set('Cache.SerializerPath', Config::get('purifier::config.cachePath'));
 
             if (is_array(Config::get('purifier::config.settings.default')))
             {
