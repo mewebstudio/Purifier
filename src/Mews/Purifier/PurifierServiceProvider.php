@@ -1,6 +1,8 @@
 <?php namespace Mews\Purifier;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider,
+    Illuminate\Support\Facades\File,
+    Illuminate\Support\Facades\Config;
 
 class PurifierServiceProvider extends ServiceProvider {
 
@@ -26,6 +28,8 @@ class PurifierServiceProvider extends ServiceProvider {
 	    {
 
 	    });
+
+        $this->makeStorageSerializerDir();
 	}
 
 	/**
@@ -50,5 +54,21 @@ class PurifierServiceProvider extends ServiceProvider {
 	{
 		return array('purifier');
 	}
+
+    /**
+     * Check for cache path, and create if missing
+     */
+    protected function makeStorageSerializerDir()
+    {
+        $purifierCachePath = Config::get('purifier::config.cachePath');
+        if (File::exists($purifierCachePath) === false)
+        {
+            File::makeDirectory($purifierCachePath);
+
+            $gitIgnoreContent = '*';
+            $gitIgnoreContent .= "\n" . '!.gitignore';
+            File::put($purifierCachePath . '/.gitignore', $gitIgnoreContent);
+        }
+    }
 
 }

@@ -12,6 +12,7 @@ return array(
 	'encoding' => 'UTF-8',
     'finalize' => true,
     'preload'  => false,
+    'cachePath' => storage_path('purifier'),
     'settings' => array(
         'default' => array(
             'HTML.Doctype'             => 'XHTML 1.0 Strict',
