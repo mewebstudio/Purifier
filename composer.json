@@ -1,24 +1,42 @@
 {
-    "name": "mews/purifier",
-    "description": "HTMLPurifier Package for Laravel 4",
-    "keywords": ["L4", "Laravel 4", "Laravel", "HTMLPurifier", "Purifier"],
-    "homepage": "http://github.com/mewebstudio/Purifier",
-    "license": "LGPL",
-    "authors": [
-        {
-            "name": "Muharrem ERIN",
-            "email": "me@mewebstudio.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.3.0",
-        "illuminate/support": "5.*",
-        "ezyang/htmlpurifier": "4.6.*"
-    },
-    "autoload": {
-        "psr-0": {
-            "Mews\\Purifier": "src/"
-        }
-    },
-    "minimum-stability": "dev"
+	"name": "mews/purifier",
+	"type": "package",
+	"description": "Laravel 5 HtmlPurifier Package",
+	"keywords": ["laravel5 HtmlPurifier", "laravel5 Purifier", "laravel5 Security", "HtmlPurifier", "Purifier", "security", "xss"],
+	"homepage": "https://github.com/mewebstudio/purifier",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Muharrem ERİN",
+			"email": "me@mewebstudio.com",
+			"homepage": "https://github.com/mewebstudio",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.4",
+		"illuminate/config": "~5.0",
+		"illuminate/filesystem": "~5.0",
+		"ezyang/htmlpurifier": "4.6.*"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "~4.0",
+		"mockery/mockery": "dev-master"
+	},
+	"autoload": {
+		"psr-4": {
+			"Purifier\\": "src/"
+		},
+		"files": [
+			"src/helpers.php"
+		]
+	},
+	"autoload-dev": {
+		"classmap": [
+			"tests/TestCase.php"
+		],
+		"psr-4": {
+			"Mews\\Test\\": "tests/"
+		}
+	}
 }
