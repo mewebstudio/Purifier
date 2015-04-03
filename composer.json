@@ -25,7 +25,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Purifier\\": "src/"
+			"Mews\\Purifier\\": "src/"
 		},
 		"files": [
 			"src/helpers.php"
