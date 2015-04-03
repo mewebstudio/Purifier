@@ -15,7 +15,7 @@ For Laravel 4
 {
     "require": {
         "laravel/framework": "4.0.*",
-        "mews/purifier": "master-l4"
+        "mews/purifier": "dev-master-l4"
     },
     "minimum-stability": "dev"
 }
