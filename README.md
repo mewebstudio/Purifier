@@ -1,11 +1,13 @@
-# HTMLPurifier for Laravel 4/5
+# HTMLPurifier for Laravel 4
 
-A simple [Laravel 4/5](http://four.laravel.com/) service provider for including the [HTMLPurifier for Laravel 4/5](https://github.com/mewebstudio/purifier).
+A simple [Laravel 4](http://four.laravel.com/) service provider for including the [HTMLPurifier for Laravel 4](https://github.com/mewebstudio/purifier).
+
+for Laravel 5 [HTMLPurifier for Laravel 5](https://github.com/mewebstudio/Purifier)
 
 ## Installation
 
 The HTMLPurifier Service Provider can be installed via [Composer](http://getcomposer.org) by requiring the
-`ezyang/htmlpurifier`, `mews/purifier` package and setting the `minimum-stability` to `dev` (required for Laravel 4/5) in your
+`ezyang/htmlpurifier`, `mews/purifier` package and setting the `minimum-stability` to `dev` (required for Laravel 4) in your
 project's `composer.json`.
 
 For Laravel 4
@@ -14,17 +16,6 @@ For Laravel 4
     "require": {
         "laravel/framework": "4.0.*",
         "mews/purifier": "1.0.2"
-    },
-    "minimum-stability": "dev"
-}
-```
-
-For Laravel 5
-```json
-{
-    "require": {
-        "laravel/framework": "5.0.*",
-        "mews/purifier": "dev-master"
     },
     "minimum-stability": "dev"
 }
