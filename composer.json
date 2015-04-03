@@ -38,5 +38,6 @@
 		"psr-4": {
 			"Mews\\Test\\": "tests/"
 		}
-	}
+	},
+	"minimum-stability": "dev"
 }
