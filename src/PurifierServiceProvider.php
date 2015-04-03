@@ -38,11 +38,6 @@ class PurifierServiceProvider extends ServiceProvider {
         $this->app->bind('purifier', function($app)
         {
             return new Purifier($app['files'], $app['config']);
-            /*
-            $theme = new Theme($app['files'], $app['config'], $app['view'], $app['request']);
-            $theme->start();
-            return $theme;
-            */
         });
     }
 
