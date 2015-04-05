@@ -69,28 +69,22 @@ return array(
 
 default
 ```php
-
-    clean(Input::get('inputname'));
-
+clean(Input::get('inputname'));
 ```
 or
 
 ```php
-
-    Purifier::clean(Input::get('inputname'));
-
+Purifier::clean(Input::get('inputname'));
 ```
 
 dynamic config
 ```php
-
-    clean('This is my H1 title', 'titles');
-    clean('This is my H1 title', array('Attr.EnableID' => true));
+clean('This is my H1 title', 'titles');
+clean('This is my H1 title', array('Attr.EnableID' => true));
 ```
 or
 
 ```php
-
-    Purifier::clean('This is my H1 title', 'titles');
-    Purifier::clean('This is my H1 title', array('Attr.EnableID' => true));
+Purifier::clean('This is my H1 title', 'titles');
+Purifier::clean('This is my H1 title', array('Attr.EnableID' => true));
 ```
