@@ -88,3 +88,5 @@ or
 Purifier::clean('This is my H1 title', 'titles');
 Purifier::clean('This is my H1 title', array('Attr.EnableID' => true));
 ```
+
+for Laravel 4 [HTMLPurifier for Laravel 4](https://github.com/mewebstudio/Purifier/tree/master-l4)
