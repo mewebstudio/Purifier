@@ -1,4 +1,4 @@
-<?php namespace Mews\Purifier\Facedes;
+<?php namespace Mews\Purifier\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
