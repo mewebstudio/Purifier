@@ -1,5 +1,7 @@
 # HTMLPurifier for Laravel 5
 
+[![Build Status](https://scrutinizer-ci.com/g/mewebstudio/Purifier/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mewebstudio/Purifier/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mewebstudio/Purifier/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mewebstudio/Purifier/?branch=master)
+
 A simple [Laravel 5](http://www.laravel.com/) service provider for including the [HTMLPurifier for Laravel 5](https://github.com/mewebstudio/purifier).
 
 for Laravel 4 [HTMLPurifier for Laravel 4](https://github.com/mewebstudio/Purifier/tree/master-l4)
