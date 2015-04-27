@@ -13,9 +13,16 @@ requiring the `mews/purifier` package in your project's `composer.json`:
 {
     "require": {
         "laravel/framework": "~5.0",
-        "mews/purifier": "dev-master"
+        "mews/purifier": "~2.0",
     }
 }
+```
+
+or
+
+Require this package with composer:
+```
+composer require mews/purifier
 ```
 
 Update your packages with `composer update` or install with `composer install`.
