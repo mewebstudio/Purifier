@@ -117,6 +117,8 @@ class Purifier
      */
     protected function getConfig($config = null)
     {
+        $chosen = 'purifier.settings.default.definitions';
+
         if( ! $config)
         {
             if( ! $this->config->get('purifier.settings.default'))
@@ -126,7 +128,39 @@ class Purifier
         }
         elseif(is_string($config))
         {
+            $chosen = 'purifier.settings.'.$config.'.definitions';
             $config = $this->config->get('purifier.settings.' . $config);
+        }
+        else
+        {
+            return $config;
+        }
+
+        unset($config['definitions']);
+
+        if($this->config->has($chosen) && is_object($this->purifier))
+        {
+            $c = HTMLPurifier_Config::createDefault();
+            $c->loadArray($config);
+
+            $c->set('HTML.DefinitionID', $this->config->get($chosen.'.def.id'));
+            $c->set('HTML.DefinitionRev', $this->config->get($chosen.'.def.rev'));
+
+            if($def = $c->maybeGetRawHTMLDefinition()) {
+                foreach($this->config->get($chosen.'.elements') as $element) {
+                    if(isset($element[4])) {
+                        $def->addElement($element[0], $element[1], $element[2], $element[3], $element[4]);
+                    } else {
+                        $def->addElement($element[0], $element[1], $element[2], $element[3]);
+                    }
+                }
+
+                foreach($this->config->get($chosen.'.attributes') as $element) {
+                    $def->addAttribute($element[0], $element[1], $element[2]);
+                }
+            }
+
+            $config = $c;
         }
 
         return $config;

@@ -13,6 +13,19 @@ return [
             'CSS.AllowedProperties'    => 'font,font-size,font-weight,font-style,font-family,text-decoration,padding-left,color,background-color,text-align',
             'AutoFormat.AutoParagraph' => true,
             'AutoFormat.RemoveEmpty'   => true,
+            'definitions' => [
+                'def' => [
+                    'id' => 'html5-definitions',
+                    'rev' => 1
+                ],
+                'elements' => [
+                    ['figure', 'Block', 'Optional: (figcaption, Flow) | (Flow, figcaption) | Flow', 'Common'],
+                    ['figcaption', 'Inline', 'Flow', 'Common']
+                ],
+                'attributes' => [
+                    ['iframe', 'allowfullscreen', 'Bool']
+                ]
+            ]
         ],
         'test' => [
             'Attr.EnableID' => true
