@@ -64,6 +64,18 @@ return array(
         "default" => array(
             "HTML.SafeIframe" => 'true',
             "URI.SafeIframeRegexp" => "%^(http://|https://|//)(www.youtube.com/embed/|player.vimeo.com/video/)%",
+            "definitions" => [
+                "def" => [
+                    "id" => "html5-def",
+                    "rev" => 1
+                ],
+                "elements" => [
+                    ['figure', 'Block', 'Optional: (figcaption, Flow) | (Flow, figcaption) | Flow', 'Common'],
+                ],
+                'attributes' => [
+                    ['iframe', 'allowfullscreen', 'Bool'],
+                ]
+            ]
         ),
         "titles" => array(
             'AutoFormat.AutoParagraph' => false,
