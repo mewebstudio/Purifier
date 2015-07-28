@@ -69,6 +69,7 @@ class Purifier
 
         // Create a new configuration object
         $config = HTMLPurifier_Config::createDefault();
+
         // Allow configuration to be modified
         if (!$this->config->get('purifier.finalize')) {
             $config->autoFinalize = false;
@@ -109,6 +110,10 @@ class Purifier
      */
     protected function getConfig($config = null)
     {
+        $default_config = [];
+        $default_config['Core.Encoding']        = $this->config->get('purifier.encoding');
+        $default_config['Cache.SerializerPath'] = $this->config->get('purifier.cachePath');
+
         if (!$config) {
             $config = $this->config->get('purifier.settings.default');
         } elseif (is_string($config)) {
@@ -119,9 +124,7 @@ class Purifier
             $config = [];
         }
 
-        // Use the same character set as Laravel
-        $config['Core.Encoding']        = $this->config->get('purifier.encoding');
-        $config['Cache.SerializerPath'] = $this->config->get('purifier.cachePath');
+        $config = $default_config + $config;
 
         return $config;
     }
@@ -138,6 +141,7 @@ class Purifier
                 return $this->clean($item, $config);
             }, $dirty);
         } else {
+            //the htmlpurifier use replace instead merge, so we merge
             return $this->purifier->purify($dirty, $this->getConfig($config));
         }
     }
