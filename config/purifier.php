@@ -9,19 +9,18 @@
  *     $config->autoFinalize = false;
  * }
  * $config->loadArray($this->getConfig());
- * set cachePath to null for no cache, or just like this:
- *    'cachePath' => storage_path('app/purifier'),
+ *
  * You must NOT delete the default settings
  * anything in settings should be compacted with params that needed to instance HTMLPurifier_Config.
-
+ *
+ * @link http://htmlpurifier.org/live/configdoc/plain.html
  */
 
 return [
 
     'encoding'  => 'UTF-8',
     'finalize'  => true,
-    'preload'   => false,
-    'cachePath' => null,
+    'cachePath' => storage_path('app/purifier'),
     'settings'  => [
         'default' => [
             'HTML.Doctype'             => 'XHTML 1.0 Strict',

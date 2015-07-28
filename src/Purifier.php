@@ -74,11 +74,6 @@ class Purifier
             $config->autoFinalize = false;
         }
 
-        // Use the same character set as Laravel
-        $config->set('Core.Encoding', $this->config->get('purifier.encoding'));
-
-        $config->set('Cache.SerializerPath', $this->config->get('purifier.cachePath'));
-
         $config->loadArray($this->getConfig());
 
         // Create HTMLPurifier object
@@ -119,6 +114,14 @@ class Purifier
         } elseif (is_string($config)) {
             $config = $this->config->get('purifier.settings.' . $config);
         }
+
+        if (!is_array($config)) {
+            $config = [];
+        }
+
+        // Use the same character set as Laravel
+        $config['Core.Encoding']        = $this->config->get('purifier.encoding');
+        $config['Cache.SerializerPath'] = $this->config->get('purifier.cachePath');
 
         return $config;
     }
