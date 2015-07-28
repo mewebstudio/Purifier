@@ -1,11 +1,27 @@
 <?php
+/**
+ * Ok, glad you are here
+ * first we get a config instance, and set the settings
+
+ * $config = HTMLPurifier_Config::createDefault();
+ * $config->set('Core.Encoding', $this->config->get('purifier.encoding'));
+ * $config->set('Cache.SerializerPath', $this->config->get('purifier.cachePath'));
+ * if ( ! $this->config->get('purifier.finalize')) {
+ *     $config->autoFinalize = false;
+ * }
+ * $config->loadArray($this->getConfig());
+ *
+ * set cachePath to null for no cache, or just like this:
+ *    'cachePath' => storage_path('app/purifier'),
+ *
+ */
 
 return [
 
     'encoding' => 'UTF-8',
     'finalize' => true,
     'preload'  => false,
-    'cachePath' => storage_path('purifier'),
+    'cachePath' => null,
     'settings' => [
         'default' => [
             'HTML.Doctype'             => 'XHTML 1.0 Strict',

@@ -96,9 +96,12 @@ class Purifier
     {
         $cachePath = $this->config->get('purifier.cachePath');
 
-        if( ! $this->files->isDirectory($cachePath))
+        if ($cachePath)
         {
-            $this->files->makeDirectory($cachePath);
+            if( ! $this->files->isDirectory($cachePath))
+            {
+                $this->files->makeDirectory($cachePath);
+            }
         }
     }
 
