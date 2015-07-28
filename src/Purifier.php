@@ -1,16 +1,15 @@
 <?php namespace Mews\Purifier;
 
 /**
- *
  * Laravel 5 HTMLPurifier package
+ *
  * @copyright Copyright (c) 2015 MeWebStudio
- * @version 2.0.0
- * @author Muharrem ERİN
+ * @version   2.0.0
+ * @author    Muharrem ERİN
  * @contact me@mewebstudio.com
  * @web http://www.mewebstudio.com
- * @date 2014-04-02
- * @license MIT
- *
+ * @date      2014-04-02
+ * @license   MIT
  */
 
 use Exception;
@@ -46,7 +45,7 @@ class Purifier
      */
     public function __construct(Filesystem $files, Repository $config)
     {
-        $this->files = $files;
+        $this->files  = $files;
         $this->config = $config;
 
         $this->setUp();
@@ -59,10 +58,8 @@ class Purifier
      */
     private function setUp()
     {
-        if ( ! $this->config->has('purifier'))
-        {
-            if ( ! $this->config->has('mews.purifier'))
-            {
+        if (!$this->config->has('purifier')) {
+            if (!$this->config->has('mews.purifier')) {
                 throw new Exception('Configuration parameters not loaded!');
             }
             $this->config->set('purifier', $this->config->get('mews.purifier'));
@@ -73,8 +70,7 @@ class Purifier
         // Create a new configuration object
         $config = HTMLPurifier_Config::createDefault();
         // Allow configuration to be modified
-        if ( ! $this->config->get('purifier.finalize'))
-        {
+        if (!$this->config->get('purifier.finalize')) {
             $config->autoFinalize = false;
         }
 
@@ -96,10 +92,8 @@ class Purifier
     {
         $cachePath = $this->config->get('purifier.cachePath');
 
-        if ($cachePath)
-        {
-            if( ! $this->files->isDirectory($cachePath))
-            {
+        if ($cachePath) {
+            if (!$this->files->isDirectory($cachePath)) {
                 $this->files->makeDirectory($cachePath);
             }
         }
@@ -120,12 +114,9 @@ class Purifier
      */
     protected function getConfig($config = null)
     {
-        if( ! $config)
-        {
+        if (!$config) {
             $config = $this->config->get('purifier.settings.default');
-        }
-        elseif(is_string($config))
-        {
+        } elseif (is_string($config)) {
             $config = $this->config->get('purifier.settings.' . $config);
         }
 
@@ -133,20 +124,17 @@ class Purifier
     }
 
     /**
-     * @param $dirty
+     * @param      $dirty
      * @param null $config
      * @return mixed
      */
     public function clean($dirty, $config = null)
     {
-        if(is_array($dirty))
-        {
+        if (is_array($dirty)) {
             return array_map(function ($item) use ($config) {
                 return $this->clean($item, $config);
             }, $dirty);
-        }
-        else
-        {
+        } else {
             return $this->purifier->purify($dirty, $this->getConfig($config));
         }
     }
