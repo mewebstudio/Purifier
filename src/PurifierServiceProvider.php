@@ -2,7 +2,8 @@
 
 use Illuminate\Support\ServiceProvider;
 
-class PurifierServiceProvider extends ServiceProvider {
+class PurifierServiceProvider extends ServiceProvider
+{
 
     /**
      * Indicates if loading of the provider is deferred.
@@ -12,7 +13,6 @@ class PurifierServiceProvider extends ServiceProvider {
     protected $defer = false;
 
     /**
-     *
      * Boot the service provider.
      *
      * @return null
@@ -20,7 +20,7 @@ class PurifierServiceProvider extends ServiceProvider {
     public function boot()
     {
         $this->publishes([
-           __DIR__.'/../config/purifier.php' => config_path('purifier.php')
+            __DIR__ . '/../config/purifier.php' => config_path('purifier.php')
         ]);
     }
 
@@ -32,11 +32,10 @@ class PurifierServiceProvider extends ServiceProvider {
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/purifier.php', 'mews.purifier'
+            __DIR__ . '/../config/purifier.php', 'mews.purifier'
         );
 
-        $this->app->bind('purifier', function($app)
-        {
+        $this->app->bind('purifier', function ($app) {
             return new Purifier($app['files'], $app['config']);
         });
     }

@@ -1,16 +1,15 @@
 <?php namespace Mews\Purifier;
 
 /**
- *
  * Laravel 5 HTMLPurifier package
+ *
  * @copyright Copyright (c) 2015 MeWebStudio
- * @version 2.0.0
- * @author Muharrem ERİN
+ * @version   2.0.0
+ * @author    Muharrem ERİN
  * @contact me@mewebstudio.com
  * @web http://www.mewebstudio.com
- * @date 2014-04-02
- * @license MIT
- *
+ * @date      2014-04-02
+ * @license   MIT
  */
 
 use Exception;
@@ -46,7 +45,7 @@ class Purifier
      */
     public function __construct(Filesystem $files, Repository $config)
     {
-        $this->files = $files;
+        $this->files  = $files;
         $this->config = $config;
 
         $this->setUp();
@@ -59,10 +58,8 @@ class Purifier
      */
     private function setUp()
     {
-        if ( ! $this->config->has('purifier'))
-        {
-            if ( ! $this->config->has('mews.purifier'))
-            {
+        if (!$this->config->has('purifier')) {
+            if (!$this->config->has('mews.purifier')) {
                 throw new Exception('Configuration parameters not loaded!');
             }
             $this->config->set('purifier', $this->config->get('mews.purifier'));
@@ -72,16 +69,11 @@ class Purifier
 
         // Create a new configuration object
         $config = HTMLPurifier_Config::createDefault();
+
         // Allow configuration to be modified
-        if ( ! $this->config->get('purifier.finalize'))
-        {
+        if (!$this->config->get('purifier.finalize')) {
             $config->autoFinalize = false;
         }
-
-        // Use the same character set as Laravel
-        $config->set('Core.Encoding', $this->config->get('purifier.encoding'));
-
-        $config->set('Cache.SerializerPath', $this->config->get('purifier.cachePath'));
 
         $config->loadArray($this->getConfig());
 
@@ -96,9 +88,10 @@ class Purifier
     {
         $cachePath = $this->config->get('purifier.cachePath');
 
-        if( ! $this->files->isDirectory($cachePath))
-        {
-            $this->files->makeDirectory($cachePath);
+        if ($cachePath) {
+            if (!$this->files->isDirectory($cachePath)) {
+                $this->files->makeDirectory($cachePath);
+            }
         }
     }
 
@@ -117,74 +110,38 @@ class Purifier
      */
     protected function getConfig($config = null)
     {
-        if( ! $config)
-        {
-            if( ! $this->config->get('purifier.settings.default'))
-            {
-            }
-            $chosen = 'purifier.settings.default.definitions';
+        $default_config = [];
+        $default_config['Core.Encoding']        = $this->config->get('purifier.encoding');
+        $default_config['Cache.SerializerPath'] = $this->config->get('purifier.cachePath');
+
+        if (!$config) {
             $config = $this->config->get('purifier.settings.default');
-        }
-        elseif(is_string($config))
-        {
-            $chosen = 'purifier.settings.'.$config.'.definitions';
+        } elseif (is_string($config)) {
             $config = $this->config->get('purifier.settings.' . $config);
         }
 
-        if(isset($chosen))
-        {
-            unset($config['definitions']);
-
-            if($this->config->has($chosen) && is_object($this->purifier))
-            {
-                $c = HTMLPurifier_Config::createDefault();
-                $c->loadArray($config);
-
-                $c->set('HTML.DefinitionID', $this->config->get($chosen . '.def.id'));
-                $c->set('HTML.DefinitionRev', $this->config->get($chosen . '.def.rev'));
-
-                if($def = $c->maybeGetRawHTMLDefinition())
-                {
-                    foreach($this->config->get($chosen . '.elements') as $element)
-                    {
-                        if(isset($element[4]))
-                        {
-                            $def->addElement($element[0], $element[1], $element[2], $element[3], $element[4]);
-                        }
-                        else
-                        {
-                            $def->addElement($element[0], $element[1], $element[2], $element[3]);
-                        }
-                    }
-
-                    foreach($this->config->get($chosen . '.attributes') as $element)
-                    {
-                        $def->addAttribute($element[0], $element[1], $element[2]);
-                    }
-                }
-
-                $config = $c;
-            }
+        if (!is_array($config)) {
+            $config = [];
         }
+
+        $config = $default_config + $config;
 
         return $config;
     }
 
     /**
-     * @param $dirty
+     * @param      $dirty
      * @param null $config
      * @return mixed
      */
     public function clean($dirty, $config = null)
     {
-        if(is_array($dirty))
-        {
+        if (is_array($dirty)) {
             return array_map(function ($item) use ($config) {
                 return $this->clean($item, $config);
             }, $dirty);
-        }
-        else
-        {
+        } else {
+            //the htmlpurifier use replace instead merge, so we merge
             return $this->purifier->purify($dirty, $this->getConfig($config));
         }
     }
