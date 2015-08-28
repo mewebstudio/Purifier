@@ -37,7 +37,7 @@ Find the `providers` key in `config/app.php` and register the HTMLPurifier Servi
 ```php
     'providers' => [
         // ...
-        'Mews\Purifier\PurifierServiceProvider',
+        Mews\Purifier\PurifierServiceProvider::class,
     ]
 ```
 
@@ -46,7 +46,7 @@ Find the `aliases` key in `app/config/app.php`.
 ```php
     'aliases' => [
         // ...
-        'Purifier' => 'Mews\Purifier\Facades\Purifier',
+        Purifier' => Mews\Purifier\Facades\Purifier::class,
     ]
 ```
 
