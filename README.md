@@ -46,7 +46,7 @@ Find the `aliases` key in `app/config/app.php`.
 ```php
     'aliases' => [
         // ...
-        Purifier' => Mews\Purifier\Facades\Purifier::class,
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
     ]
 ```
 
