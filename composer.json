@@ -15,9 +15,9 @@
 	],
 	"require": {
 		"php": ">=5.4",
-		"laravel/framework": "~5.1",
-		"illuminate/config": "~5.1",
-		"illuminate/filesystem": "~5.1",
+		"laravel/framework": "~5.*",
+		"illuminate/config": "~5.*",
+		"illuminate/filesystem": "~5.*",
 		"ezyang/htmlpurifier": "4.7.*"
 	},
 	"require-dev": {
