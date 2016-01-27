@@ -15,7 +15,6 @@
 	],
 	"require": {
 		"php": ">=5.4",
-		"laravel/framework": "~5.1",
 		"illuminate/config": "~5.1",
 		"illuminate/filesystem": "~5.1",
 		"ezyang/htmlpurifier": "4.7.*"
@@ -23,6 +22,10 @@
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
 		"mockery/mockery": "dev-master"
+	},
+	"suggest": {
+		"laravel/framework": "To test the Laravel bindings",
+		"laravel/lumen-framework": "To test the Lumen bindings"
 	},
 	"autoload": {
 		"psr-4": {
