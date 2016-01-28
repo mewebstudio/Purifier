@@ -1,6 +1,8 @@
 <?php namespace Mews\Purifier;
 
+use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Lumen\Application as LumenApplication;
 
 class PurifierServiceProvider extends ServiceProvider
 {
@@ -19,9 +21,13 @@ class PurifierServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/../config/purifier.php' => config_path('purifier.php')
-        ]);
+        if ($this->app instanceof LaravelApplication) {
+            $this->publishes([
+                __DIR__ . '/../config/purifier.php' => config_path('purifier.php')
+            ]);
+        } elseif ($this->app instanceof LumenApplication) {
+            $this->app->configure('purifier');
+        }
     }
 
     /**
