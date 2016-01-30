@@ -1,9 +1,8 @@
-<?php namespace Chromabits\Tests\Purifier;
+<?php namespace Mews\Tests;
 
-use Mews\Tests\TestCase;
 use Mockery;
 
-class PurifierTest extends TestCase
+class PurifierTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testConstructor()

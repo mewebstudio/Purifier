@@ -1,9 +1,8 @@
 <?php namespace Mews\Tests\Purifier;
 
-use Mews\Tests\TestCase;
 use Mockery;
 
-class PurifierServiceProviderTest extends TestCase
+class PurifierServiceProviderTest extends \PHPUnit_Framework_TestCase
 {
     public function testRegister()
     {
