@@ -3,3 +3,5 @@
 .env.php
 composer.lock
 vendor
+/.idea
+/.settings
