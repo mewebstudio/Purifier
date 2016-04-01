@@ -21,6 +21,7 @@ return [
     'encoding'  => 'UTF-8',
     'finalize'  => true,
     'cachePath' => storage_path('app/purifier'),
+    'cacheFileMode' => 0755,
     'settings'  => [
         'default' => [
             'HTML.Doctype'             => 'XHTML 1.0 Strict',
