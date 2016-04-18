@@ -146,4 +146,13 @@ class Purifier
         }
     }
 
+    /**
+     * Get HTMLPurifier instance.
+     *
+     * @return \HTMLPurifier
+     */
+    public function getInstance()
+    {
+        return $this->purifier;
+    }
 }
