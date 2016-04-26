@@ -90,7 +90,7 @@ class Purifier
 
         if ($cachePath) {
             if (!$this->files->isDirectory($cachePath)) {
-                $this->files->makeDirectory($cachePath);
+                $this->files->makeDirectory($cachePath, $this->config->get('purifier.cacheFileMode', 0755) );
             }
         }
     }
@@ -113,6 +113,7 @@ class Purifier
         $default_config = [];
         $default_config['Core.Encoding']        = $this->config->get('purifier.encoding');
         $default_config['Cache.SerializerPath'] = $this->config->get('purifier.cachePath');
+        $default_config['Cache.SerializerPermissions'] = $this->config->get('purifier.cacheFileMode', 0755 );
 
         if (!$config) {
             $config = $this->config->get('purifier.settings.default');
