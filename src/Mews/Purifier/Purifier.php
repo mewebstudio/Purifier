@@ -121,6 +121,9 @@ class Purifier {
     {
         if (is_array($dirty))
         {
+            // Define clean variable for empty array
+            $clean = [];
+
             foreach ($dirty as $key => $value)
             {
                 // Recursively clean arrays
