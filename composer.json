@@ -23,7 +23,8 @@
   "require-dev": {
     "phpunit/phpunit": "^4.8|^5.0",
     "mockery/mockery": "0.9.*",
-    "graham-campbell/testbench": "^3.2"
+    "graham-campbell/testbench": "^3.2",
+    "scrutinizer/ocular": "^1.3"
   },
   "suggest": {
     "laravel/framework": "To test the Laravel bindings",
