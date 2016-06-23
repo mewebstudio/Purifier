@@ -1,12 +1,12 @@
 <?php namespace Mews\Purifier;
 
+use Illuminate\Container\Container;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Lumen\Application as LumenApplication;
 
 class PurifierServiceProvider extends ServiceProvider
 {
-
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -21,14 +21,25 @@ class PurifierServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if ($this->app instanceof LaravelApplication) {
-            $this->publishes([
-                __DIR__ . '/../config/purifier.php' => config_path('purifier.php')
-            ]);
+        $this->setupConfig();
+    }
+
+    /**
+     * Setup the config.
+     *
+     * @return void
+     */
+    protected function setupConfig()
+    {
+        $source = realpath(__DIR__.'/../config/purifier.php');
+        if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
+            $this->publishes([$source => config_path('purifier.php')]);
         } elseif ($this->app instanceof LumenApplication) {
             $this->app->configure('purifier');
         }
+        $this->mergeConfigFrom($source, 'purifier');
     }
+
 
     /**
      * Register the service provider.
@@ -37,13 +48,11 @@ class PurifierServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(
-            __DIR__ . '/../config/purifier.php', 'mews.purifier'
-        );
-
-        $this->app->bind('purifier', function ($app) {
+        $this->app->singleton('purifier', function (Container $app) {
             return new Purifier($app['files'], $app['config']);
         });
+
+        $this->app->alias('purifier', Purifier::class);
     }
 
     /**
@@ -55,5 +64,4 @@ class PurifierServiceProvider extends ServiceProvider
     {
         return ['purifier'];
     }
-
 }

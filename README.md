@@ -54,7 +54,7 @@ Find the `aliases` key in `app/config/app.php`.
 
 To use your own settings, publish config.
 
-```$ php artisan vendor:publish```
+```$ php artisan vendor:publish --provider="Mews\Purifier\PurifierServiceProvider"```
 
 Config file `config/purifier.php` should like this
 

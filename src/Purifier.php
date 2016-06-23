@@ -1,4 +1,6 @@
-<?php namespace Mews\Purifier;
+<?php
+
+namespace Mews\Purifier;
 
 /**
  * Laravel 5 HTMLPurifier package
@@ -45,7 +47,7 @@ class Purifier
      */
     public function __construct(Filesystem $files, Repository $config)
     {
-        $this->files  = $files;
+        $this->files = $files;
         $this->config = $config;
 
         $this->setUp();
@@ -59,10 +61,7 @@ class Purifier
     private function setUp()
     {
         if (!$this->config->has('purifier')) {
-            if (!$this->config->has('mews.purifier')) {
-                throw new Exception('Configuration parameters not loaded!');
-            }
-            $this->config->set('purifier', $this->config->get('mews.purifier'));
+            throw new Exception('Configuration parameters not loaded!');
         }
 
         $this->checkCacheDirectory();
@@ -90,13 +89,14 @@ class Purifier
 
         if ($cachePath) {
             if (!$this->files->isDirectory($cachePath)) {
-                $this->files->makeDirectory($cachePath, $this->config->get('purifier.cacheFileMode', 0755) );
+                $this->files->makeDirectory($cachePath, $this->config->get('purifier.cacheFileMode', 0755));
             }
         }
     }
 
     /**
      * @param HTMLPurifier_Config $config
+     * 
      * @return HTMLPurifier_Config
      */
     protected function configure(HTMLPurifier_Config $config)
@@ -106,19 +106,20 @@ class Purifier
 
     /**
      * @param null $config
+     * 
      * @return mixed|null
      */
     protected function getConfig($config = null)
     {
         $default_config = [];
-        $default_config['Core.Encoding']        = $this->config->get('purifier.encoding');
+        $default_config['Core.Encoding'] = $this->config->get('purifier.encoding');
         $default_config['Cache.SerializerPath'] = $this->config->get('purifier.cachePath');
-        $default_config['Cache.SerializerPermissions'] = $this->config->get('purifier.cacheFileMode', 0755 );
+        $default_config['Cache.SerializerPermissions'] = $this->config->get('purifier.cacheFileMode', 0755);
 
         if (!$config) {
             $config = $this->config->get('purifier.settings.default');
         } elseif (is_string($config)) {
-            $config = $this->config->get('purifier.settings.' . $config);
+            $config = $this->config->get('purifier.settings.'.$config);
         }
 
         if (!is_array($config)) {
@@ -133,6 +134,7 @@ class Purifier
     /**
      * @param      $dirty
      * @param null $config
+     * 
      * @return mixed
      */
     public function clean($dirty, $config = null)
@@ -141,10 +143,9 @@ class Purifier
             return array_map(function ($item) use ($config) {
                 return $this->clean($item, $config);
             }, $dirty);
-        } else {
-            //the htmlpurifier use replace instead merge, so we merge
-            return $this->purifier->purify($dirty, $this->getConfig($config));
         }
+
+        return $this->purifier->purify($dirty, $this->getConfig($config));
     }
 
     /**
