@@ -12,7 +12,7 @@ class PurifierServiceProvider extends ServiceProvider
      *
      * @var bool
      */
-    protected $defer = false;
+    protected $defer = true;
 
     /**
      * Boot the service provider.
