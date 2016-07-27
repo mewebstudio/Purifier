@@ -1,4 +1,6 @@
-<?php namespace Mews\Purifier\Facades;
+<?php
+
+namespace Mews\Purifier\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -12,5 +14,4 @@ class Purifier extends Facade
     {
         return 'purifier';
     }
-
 }

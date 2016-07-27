@@ -17,12 +17,11 @@
  */
 
 return [
-
-    'encoding'  => 'UTF-8',
-    'finalize'  => true,
-    'cachePath' => storage_path('app/purifier'),
+    'encoding'      => 'UTF-8',
+    'finalize'      => true,
+    'cachePath'     => storage_path('app/purifier'),
     'cacheFileMode' => 0755,
-    'settings'  => [
+    'settings'      => [
         'default' => [
             'HTML.Doctype'             => 'XHTML 1.0 Strict',
             'HTML.Allowed'             => 'div,b,strong,i,em,a[href|title],ul,ol,li,p[style],br,span[style],img[width|height|alt|src]',
