@@ -74,7 +74,7 @@ return [
             'AutoFormat.RemoveEmpty'   => true,
         ],
         'test'    => [
-            'Attr.EnableID' => true
+            'Attr.EnableID' => 'true',
         ],
         "youtube" => [
             "HTML.SafeIframe"      => 'true',
@@ -110,11 +110,11 @@ return [
 					'poster' => 'URI',
 					'preload' => 'Enum#auto,metadata,none',
 					'controls' => 'Bool',
-                ],
+                ]],
                 ['source', 'Block', 'Flow', 'Common', [
 					'src' => 'URI',
 					'type' => 'Text',
-                ],
+                ]],
 
 				// http://developers.whatwg.org/text-level-semantics.html
                 ['s',    'Inline', 'Inline', 'Common'],
@@ -125,8 +125,8 @@ return [
                 ['wbr',  'Inline', 'Empty', 'Core'],
 				
 				// http://developers.whatwg.org/edits.html
-                ['ins', 'Block', 'Flow', 'Common', array('cite' => 'URI', 'datetime' => 'CDATA')],
-                ['del', 'Block', 'Flow', 'Common', array('cite' => 'URI', 'datetime' => 'CDATA')],
+                ['ins', 'Block', 'Flow', 'Common', ['cite' => 'URI', 'datetime' => 'CDATA']],
+                ['del', 'Block', 'Flow', 'Common', ['cite' => 'URI', 'datetime' => 'CDATA']],
             ],
             'attributes' => [
                 ['iframe', 'allowfullscreen', 'Bool'],
