@@ -39,6 +39,7 @@ return [
         'custom_definition' => [
             'id'  => 'html5-definitions',
             'rev' => 1,
+            'debug' => false,
             'elements' => [
                 // http://developers.whatwg.org/sections.html
                 ['section', 'Block', 'Flow', 'Common'],
