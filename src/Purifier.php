@@ -17,7 +17,7 @@ namespace Mews\Purifier;
 use Exception;
 use HTMLPurifier;
 use HTMLPurifier_Config;
-use Illuminate\Config\Repository;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Filesystem\Filesystem;
 
 class Purifier
