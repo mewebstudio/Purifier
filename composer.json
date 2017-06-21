@@ -43,6 +43,16 @@
       "Mews\\Tests\\Purifier\\": "tests/"
     }
   },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mews\\Purifier\\PurifierServiceProvider"
+            ],
+            "aliases": {
+                "Purifier": "Mews\\Purifier\\Facades\\Purifier"
+            }
+        }
+    },
   "minimum-stability": "dev",
   "prefer-stable": true
 }
