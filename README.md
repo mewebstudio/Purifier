@@ -32,6 +32,7 @@ Update your packages with `composer update` or install with `composer install`.
 To use the HTMLPurifier Service Provider, you must register the provider when bootstrapping your Laravel application. There are
 essentially two ways to do this.
 
+# For Laravel 5.0 to 5.4:
 Find the `providers` key in `config/app.php` and register the HTMLPurifier Service Provider.
 
 ```php
@@ -49,6 +50,9 @@ Find the `aliases` key in `app/config/app.php`.
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
     ]
 ```
+
+# For Laravel 5.5+: 
+The service provider will be auto-discovered. You do not need to add the provider anywhere. 
 
 ## Configuration
 
