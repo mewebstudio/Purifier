@@ -96,7 +96,7 @@ class Purifier
         }
 
         // Create HTMLPurifier object
-        $this->purifier = new HTMLPurifier($this->configure($config));
+        $this->purifier = new HTMLPurifier($config);
     }
     
     /**
