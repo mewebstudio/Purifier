@@ -49,7 +49,8 @@ class PurifierServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('purifier', function (Container $app) {
-            return new Purifier($app['files'], $app['config']);
+            $configBuilder = new PurifierConfigBuilder($app['config']);
+            return new Purifier($configBuilder, $app['files'], $app['config']);
         });
 
         $this->app->alias('purifier', Purifier::class);
