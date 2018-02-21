@@ -6,7 +6,6 @@ use HTMLPurifier;
 use Illuminate\Config\Repository;
 use Illuminate\Filesystem\Filesystem;
 use Mews\Purifier\Purifier;
-use Mews\Purifier\PurifierConfigBuilder;
 
 class PurifierTest extends AbstractTestCase
 {
@@ -31,28 +30,31 @@ class PurifierTest extends AbstractTestCase
      * @expectedException \Exception
      * @expectedExceptionMessage Configuration parameters not loaded!
      */
+    /**
+     * @expectedException \Exception
+     * @expectedExceptionMessage Configuration parameters not loaded!
+     */
     public function testExpectionIsThrownWhenConfigIsBad()
     {
-        $configBuilder = $this->app->make(PurifierConfigBuilder::class);
-        new Purifier($configBuilder, new Filesystem(), new Repository());
+        new Purifier(new Filesystem(), new Repository());
     }
 
     public function testGetConfigMethod()
     {
-        $configBuilder = $this->app->make(PurifierConfigBuilder::class);
+        $purifier = $this->app->make('purifier');
         /** @var \HTMLPurifier_Config $config */
-        $config = $this->invokeMethod($configBuilder, 'getConfig', [null]);
+        $config = $this->invokeMethod($purifier, 'getConfig', [null]);
 
         $this->assertEquals('utf-8', $config->get('Core.Encoding'));
         $this->assertEquals(storage_path('app/purifier'), $config->get('Cache.SerializerPath'));
         $this->assertEquals(493, $config->get('Cache.SerializerPermissions'));
         $this->assertEquals('HTML 4.01 Transitional', $config->get('HTML.Doctype'));
-        $this->assertEquals('div,b,strong,i,em,u,a[href|title],ul,ol,li,p[style],br,span[style],img[width|height|alt|src],section,nav,article,aside,header,footer,address,hgroup,figure,figcaption,video,source,s,var,sub,sup,mark,wbr,ins,del,u', $config->get('HTML.Allowed'));
+        $this->assertEquals('div,b,strong,i,em,u,a[href|title],ul,ol,li,p[style],br,span[style],img[width|height|alt|src]', $config->get('HTML.Allowed'));
         $this->assertEquals(explode(',', 'font,font-size,font-weight,font-style,font-family,text-decoration,padding-left,color,background-color,text-align'), array_keys($config->get('CSS.AllowedProperties')));
         $this->assertEquals(true, $config->get('AutoFormat.AutoParagraph'));
         $this->assertEquals(true, $config->get('AutoFormat.RemoveEmpty'));
 
-        $config = $this->invokeMethod($configBuilder, 'getConfig', ['Core.Encoding']);
+        $config = $this->invokeMethod($purifier, 'getConfig', ['Core.Encoding']);
 
         $this->assertEquals('utf-8', $config->get('Core.Encoding'));
         $this->assertEquals(storage_path('app/purifier'), $config->get('Cache.SerializerPath'));
@@ -98,9 +100,32 @@ class PurifierTest extends AbstractTestCase
         /** @var HTMLPurifier $purifier */
         $purifier = $this->app->make('purifier');
 
-        $html = '<section>HTML5 section tag</section>';
+        $html = '<u>custom element';
         $pureHtml = $purifier->clean($html);
 
+        $this->assertSame('<p><u>custom element</u></p>', $pureHtml);
+
+        // Test custom element from definition
+        $html = '<section>HTML5 section tag';
+        $pureHtml = $purifier->clean($html, ['HTML.Allowed' => 'section']);
+
         $this->assertSame('<section>HTML5 section tag</section>', $pureHtml);
+
+        $html = '<section class="test-class">HTML5 section tag';
+        $pureHtml = $purifier->clean($html, ['HTML.Allowed' => 'section[class]']);
+
+        $this->assertSame('<section class="test-class">HTML5 section tag</section>', $pureHtml);
+
+        // Test that we can use allowed target attribute values
+        $html = '<a href="#" target="_blank">test link</a>';
+        $pureHtml = $purifier->clean($html, ['HTML.Allowed' => 'a[href|target]']);
+
+        $this->assertSame('<a href="#" target="_blank" rel="noreferrer noopener">test link</a>', $pureHtml);
+
+        // And can not use any other
+        $html = '<a href="#" target="_forbidden">test link</a>';
+        $pureHtml = $purifier->clean($html, ['HTML.Allowed' => 'a[href|target]']);
+
+        $this->assertSame('<a href="#">test link</a>', $pureHtml);
     }
 }
