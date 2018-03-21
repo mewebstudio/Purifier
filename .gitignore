@@ -5,3 +5,10 @@ composer.lock
 vendor
 /.idea
 /.settings
+
+# Homestead & vagrant
+/.vagrant
+Vagrantfile
+Homestead.yaml
+after.sh
+aliases
