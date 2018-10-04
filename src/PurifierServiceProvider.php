@@ -21,7 +21,22 @@ class PurifierServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $source = $this->getConfigSource();
+        
+        if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
+            $this->publishes([$source => config_path('purifier.php')]);
+        } elseif ($this->app instanceof LumenApplication) {
+            $this->app->configure('purifier');
+        }
+    }
+    /**
+     * Get the config source.
+     * 
+     * @return string
+     */
+    protected function getConfigSource()
+    {
+        return realpath(__DIR__.'/../config/purifier.php');
     }
 
     /**
@@ -31,15 +46,8 @@ class PurifierServiceProvider extends ServiceProvider
      */
     protected function setupConfig()
     {
-        $source = realpath(__DIR__.'/../config/purifier.php');
-        if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
-            $this->publishes([$source => config_path('purifier.php')]);
-        } elseif ($this->app instanceof LumenApplication) {
-            $this->app->configure('purifier');
-        }
-        $this->mergeConfigFrom($source, 'purifier');
+        $this->mergeConfigFrom($this->getConfigSource(), 'purifier');
     }
-
 
     /**
      * Register the service provider.
