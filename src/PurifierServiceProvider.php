@@ -21,7 +21,7 @@ class PurifierServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->setupConfig();
+        //
     }
 
     /**
@@ -48,6 +48,8 @@ class PurifierServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->setupConfig();
+        
         $this->app->singleton('purifier', function (Container $app) {
             return new Purifier($app['files'], $app['config']);
         });
