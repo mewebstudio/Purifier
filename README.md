@@ -6,7 +6,7 @@
 [![License](https://poser.pugx.org/mews/Purifier/license.svg)](https://packagist.org/packages/mews/Purifier)
 [![Total Downloads](https://poser.pugx.org/mews/Purifier/downloads.svg)](https://packagist.org/packages/mews/Purifier)
 
-A simple [Laravel 5 & 6](http://www.laravel.com/) service provider for including the [HTMLPurifier for Laravel 5](https://github.com/mewebstudio/purifier).
+A simple [Laravel 5 & 6](http://www.laravel.com/) service provider for including the [HTMLPurifier for Laravel](https://github.com/mewebstudio/purifier).
 
 for Laravel 4 [HTMLPurifier for Laravel 4](https://github.com/mewebstudio/Purifier/tree/master-l4)
 
