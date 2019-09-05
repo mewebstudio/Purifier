@@ -1,8 +1,8 @@
 {
   "name": "mews/purifier",
   "type": "package",
-  "description": "Laravel 5 HtmlPurifier Package",
-  "keywords": ["laravel5 HtmlPurifier", "laravel5 Purifier", "laravel5 Security", "HtmlPurifier", "Purifier", "security", "xss"],
+  "description": "Laravel 5/6 HtmlPurifier Package",
+  "keywords": ["laravel6 HtmlPurifier", "laravel6 Purifier", "laravel6 Security", "laravel5 HtmlPurifier", "laravel5 Purifier", "laravel5 Security", "HtmlPurifier", "Purifier", "security", "xss"],
   "homepage": "https://github.com/mewebstudio/purifier",
   "license": "MIT",
   "authors": [
