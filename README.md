@@ -182,4 +182,13 @@ Purifier::clean('This is my H1 title', 'titles');
 Purifier::clean('This is my H1 title', array('Attr.EnableID' => true));
 ```
 
+use [URI filter](http://htmlpurifier.org/docs/enduser-uri-filter.html)
+
+```php
+Purifier::clean('This is my H1 title', 'titles', function (HTMLPurifier_Config $config) {
+    $uri = $config->getDefinition('URI');
+    $uri->addFilter(new HTMLPurifier_URIFilter_NameOfFilter(), $config);
+});
+```
+
 for Laravel 4 [HTMLPurifier for Laravel 4](https://github.com/mewebstudio/Purifier/tree/master-l4)
