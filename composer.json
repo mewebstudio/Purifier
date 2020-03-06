@@ -1,7 +1,7 @@
 {
   "name": "mews/purifier",
   "type": "package",
-  "description": "Laravel 5/6 HtmlPurifier Package",
+  "description": "Laravel 5/6/7 HtmlPurifier Package",
   "keywords": ["laravel6 HtmlPurifier", "laravel6 Purifier", "laravel6 Security", "laravel5 HtmlPurifier", "laravel5 Purifier", "laravel5 Security", "HtmlPurifier", "Purifier", "security", "xss"],
   "homepage": "https://github.com/mewebstudio/purifier",
   "license": "MIT",
@@ -15,9 +15,9 @@
   ],
   "require": {
     "php": "^7.2",
-    "illuminate/config": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || ~6",
-    "illuminate/support": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || ~6",
-    "illuminate/filesystem": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || ~6",
+    "illuminate/config": "^5.1|^6.0|^7.0",
+    "illuminate/support": "^5.1|^6.0|^7.0",
+    "illuminate/filesystem": "^5.1|^6.0|^7.0",
     "ezyang/htmlpurifier": "4.12.*"
   },
   "require-dev": {
