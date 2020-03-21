@@ -3,6 +3,7 @@
 namespace Mews\Tests\Purifier;
 
 use HTMLPurifier;
+use HTMLPurifier_Config;
 use Illuminate\Config\Repository;
 use Illuminate\Filesystem\Filesystem;
 use Mews\Purifier\Purifier;
@@ -93,6 +94,26 @@ class PurifierTest extends AbstractTestCase
         $html = '<span id="some-id">This is my H1 title';
         $pureHtml = $purifier->clean($html, 'test');
         $this->assertSame('<span id="some-id">This is my H1 title</span>', $pureHtml);
+    }
+
+    public function testCleaningWithCustomConfigAndPostCreateHook()
+    {
+        $purifier = $this->app->make('purifier');
+
+        $mockUrlFilter = \Mockery::mock('MockUriFilter', \HTMLPurifier_URIFilter::class);
+        $mockUrlFilter->shouldReceive('prepare')->once()->andReturn(true);
+        $mockUrlFilter->shouldReceive('filter')->once()->andReturn(true);
+
+        $html = '<p>https://example.com</p>';
+        $config = [
+            'HTML.Allowed' => 'p,a[href]',
+            'AutoFormat.Linkify' => true,
+        ];
+        $pureHtml = $purifier->clean($html, $config, function (HTMLPurifier_Config $config) use ($mockUrlFilter) {
+            $uri = $config->getDefinition('URI');
+            $uri->addFilter($mockUrlFilter, $config);
+        });
+        $this->assertSame('<p><a href="https://example.com">https://example.com</a></p>', $pureHtml);
     }
 
     public function testCustomDefinitions()
