@@ -46,7 +46,7 @@ Find the `providers` key in `config/app.php` and register the HTMLPurifier Servi
     ]
 ```
 
-Find the `aliases` key in `app/config/app.php`.
+Find the `aliases` key in `config/app.php`.
 
 ```php
     'aliases' => [
