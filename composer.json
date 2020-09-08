@@ -15,9 +15,9 @@
   ],
   "require": {
     "php": "^7.2",
-    "illuminate/config": "^5.1|^6.0|^7.0",
-    "illuminate/support": "^5.1|^6.0|^7.0",
-    "illuminate/filesystem": "^5.1|^6.0|^7.0",
+    "illuminate/config": "^5.1|^6.0|^7.0|^8.0",
+    "illuminate/support": "^5.1|^6.0|^7.0|^8.0",
+    "illuminate/filesystem": "^5.1|^6.0|^7.0|^8.0",
     "ezyang/htmlpurifier": "4.13.*"
   },
   "require-dev": {
