@@ -1,6 +1,7 @@
 # HTMLPurifier for Laravel 5/6/7/8
 
-[![Build Status](https://scrutinizer-ci.com/g/mewebstudio/Purifier/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mewebstudio/Purifier/build-status/master) [![codecov](https://codecov.io/gh/mewebstudio/Purifier/branch/master/graph/badge.svg)](https://codecov.io/gh/mewebstudio/Purifier)
+[![Build Status](https://travis-ci.org/mewebstudio/Purifier.svg?branch=master)](https://travis-ci.org/github/mewebstudio/Purifier)
+[![codecov](https://codecov.io/gh/mewebstudio/Purifier/branch/master/graph/badge.svg)](https://codecov.io/gh/mewebstudio/Purifier)
 [![Latest Stable Version](https://poser.pugx.org/mews/Purifier/v/stable.svg)](https://packagist.org/packages/mews/Purifier)
 [![Latest Unstable Version](https://poser.pugx.org/mews/Purifier/v/unstable.svg)](https://packagist.org/packages/mews/Purifier)
 [![License](https://poser.pugx.org/mews/Purifier/license.svg)](https://packagist.org/packages/mews/Purifier)
