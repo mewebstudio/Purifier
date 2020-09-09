@@ -18,7 +18,7 @@ before_script:
   - travis_retry composer install --prefer-source --no-interaction --dev
 
 script:
-  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+  - vendor/bin/phpunit --coverage-clover=coverage.xml
 
 after_script:
-  - php vendor/bin/ocular code-coverage:upload --format=php-clover coverage.clover
+  - bash <(curl -s https://codecov.io/bash)
