@@ -10,7 +10,7 @@ use Mews\Purifier\Purifier;
 
 class PurifierTest extends AbstractTestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 
@@ -24,19 +24,14 @@ class PurifierTest extends AbstractTestCase
     {
         $purifier = $this->app->make('purifier');
         $this->assertInstanceOf(Purifier::class, $purifier);
-        $this->assertAttributeInstanceOf(HTMLPurifier::class, 'purifier', $purifier);
+        $this->assertInstanceOf(HTMLPurifier::class, $purifier->getInstance());
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage Configuration parameters not loaded!
-     */
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage Configuration parameters not loaded!
-     */
     public function testExpectionIsThrownWhenConfigIsBad()
     {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Configuration parameters not loaded!');
+
         new Purifier(new Filesystem(), new Repository());
     }
 

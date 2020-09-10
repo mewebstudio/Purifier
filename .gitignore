@@ -12,3 +12,6 @@ Vagrantfile
 Homestead.yaml
 after.sh
 aliases
+
+# Tests
+.phpunit.result.cache
