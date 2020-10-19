@@ -132,6 +132,12 @@ class Purifier
             $attrName = $required ? $attribute[1] . '*' : $attribute[1];
             $validValues = $attribute[2];
 
+            if ($onElement === '*') {
+                $definition->info_global_attr[$attrName] = $validValues;
+
+                continue;
+            }
+
             $definition->addAttribute($onElement, $attrName, $validValues);
         }
 
