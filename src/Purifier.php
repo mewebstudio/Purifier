@@ -132,6 +132,19 @@ class Purifier
             $attrName = $required ? $attribute[1] . '*' : $attribute[1];
             $validValues = $attribute[2];
 
+            if ($onElement === '*') {
+                $def = $validValues;
+                if (is_string($validValues)) {
+                    $def = new $validValues();
+                }
+
+                if ($def instanceof \HTMLPurifier_AttrDef) {
+                    $definition->info_global_attr[$attrName] = $def;
+                }
+
+                continue;
+            }
+
             $definition->addAttribute($onElement, $attrName, $validValues);
         }
 
