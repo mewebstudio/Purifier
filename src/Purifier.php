@@ -278,6 +278,9 @@ class Purifier
         if($passThruNullValues !== false && $dirty === null) {
             return null;
         }
+        if($passThruNullValues !== false && $dirty === false) {
+            return false;
+        }
 
         return $this->purifier->purify($dirty, $configObject);
     }

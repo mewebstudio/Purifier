@@ -125,16 +125,21 @@ class PurifierTest extends AbstractTestCase
         $html = null;
         $pureHtml = $purifier->clean($html);
         $this->assertEquals('', $pureHtml);
+        $html = false;
+        $pureHtml = $purifier->clean($html);
+        $this->assertEquals('', $pureHtml);
 
         $html = [
             'good'=>'<span id="some-id">This is my H1 title',
             'bad'=>'<script>alert(\'XSS\');</script>',
             'empty'=>null,
+            'bool'=>false,
         ];
         $expectedHtml = [
             'good'=>'<p><span>This is my H1 title</span></p>',
             'bad'=>'',
             'empty'=>'',
+            'bool'=>'',
         ];
         $pureHtml = $purifier->clean($html);
         $this->assertEquals($expectedHtml, $pureHtml);
@@ -147,19 +152,25 @@ class PurifierTest extends AbstractTestCase
 
         $html = null;
         $pureHtml = $purifier->clean($html);
-        $this->assertEquals('', $pureHtml);
+        $this->assertEquals(null, $pureHtml);
+
+        $html = false;
+        $pureHtml = $purifier->clean($html);
+        $this->assertEquals(false, $pureHtml);
 
         $html = [
             'good'=>'<span id="some-id">This is my H1 title',
             'bad'=>'<script>alert(\'XSS\');</script>',
             'empty'=>null,
             'emptyStr'=>'',
+            'bool'=>false,
         ];
         $expectedHtml = [
             'good'=>'<p><span>This is my H1 title</span></p>',
             'bad'=>'',
             'empty'=>null,
             'emptyStr'=>'',
+            'bool'=>false,
         ];
         $pureHtml = $purifier->clean($html);
         $this->assertEquals($expectedHtml, $pureHtml);
