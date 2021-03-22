@@ -111,6 +111,60 @@ class PurifierTest extends AbstractTestCase
         $this->assertSame('<p><a href="https://example.com">https://example.com</a></p>', $pureHtml);
     }
 
+    public function testCleaningNullPassThru() {
+        $testConfig = require __DIR__.'/../config/purifier.php';
+        $configRepo = new Repository(['purifier'=>$testConfig]);
+
+        //$purifier = $this->app->make('purifier');
+        $purifier = new Purifier(new Filesystem(), $configRepo);
+
+        //test default config value is expected
+        $this->assertEquals(false, $configRepo->get('purifier.passThruNullValues'));
+
+        //Test default behavior is unchanged without nullPassThru Config value of true
+        $html = null;
+        $pureHtml = $purifier->clean($html);
+        $this->assertEquals('', $pureHtml);
+
+        $html = [
+            'good'=>'<span id="some-id">This is my H1 title',
+            'bad'=>'<script>alert(\'XSS\');</script>',
+            'empty'=>null,
+        ];
+        $expectedHtml = [
+            'good'=>'<p><span>This is my H1 title</span></p>',
+            'bad'=>'',
+            'empty'=>'',
+        ];
+        $pureHtml = $purifier->clean($html);
+        $this->assertEquals($expectedHtml, $pureHtml);
+
+
+        //Test behavior as expected with nullPassThru Config value of true
+        $configRepo->set('purifier.passThruNullValues', true);
+        $purifier = new Purifier(new Filesystem(), $configRepo);
+        $this->assertEquals(true, $configRepo->get('purifier.passThruNullValues'));
+
+        $html = null;
+        $pureHtml = $purifier->clean($html);
+        $this->assertEquals('', $pureHtml);
+
+        $html = [
+            'good'=>'<span id="some-id">This is my H1 title',
+            'bad'=>'<script>alert(\'XSS\');</script>',
+            'empty'=>null,
+            'emptyStr'=>'',
+        ];
+        $expectedHtml = [
+            'good'=>'<p><span>This is my H1 title</span></p>',
+            'bad'=>'',
+            'empty'=>null,
+            'emptyStr'=>'',
+        ];
+        $pureHtml = $purifier->clean($html);
+        $this->assertEquals($expectedHtml, $pureHtml);
+    }
+
     public function testCustomDefinitions()
     {
         /** @var HTMLPurifier $purifier */

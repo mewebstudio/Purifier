@@ -273,6 +273,12 @@ class Purifier
             }
         }
 
+        //If $dirty is explicit NULL, bypass purification assuming configuration allows this
+        $passThruNullValues = $this->config->get('purifier.passThruNullValues', false);
+        if($passThruNullValues !== false && $dirty === null) {
+            return null;
+        }
+
         return $this->purifier->purify($dirty, $configObject);
     }
 
