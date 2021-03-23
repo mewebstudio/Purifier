@@ -19,7 +19,7 @@
 return [
     'encoding'           => 'UTF-8',
     'finalize'           => true,
-    'passThruNullValues' => false,
+    'ignoreNonStrings'   => false,
     'cachePath'          => storage_path('app/purifier'),
     'cacheFileMode'      => 0755,
     'settings'      => [

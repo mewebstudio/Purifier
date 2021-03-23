@@ -119,7 +119,7 @@ class PurifierTest extends AbstractTestCase
         $purifier = new Purifier(new Filesystem(), $configRepo);
 
         //test default config value is expected
-        $this->assertEquals(false, $configRepo->get('purifier.passThruNullValues'));
+        $this->assertEquals(false, $configRepo->get('purifier.ignoreNonStrings'));
 
         //Test default behavior is unchanged without nullPassThru Config value of true
         $html = null;
@@ -134,21 +134,25 @@ class PurifierTest extends AbstractTestCase
             'bad'=>'<script>alert(\'XSS\');</script>',
             'empty'=>null,
             'bool'=>false,
+            'bool2'=>true,
+            'float'=>4.321,
         ];
         $expectedHtml = [
             'good'=>'<p><span>This is my H1 title</span></p>',
             'bad'=>'',
             'empty'=>'',
             'bool'=>'',
+            'bool2'=>'<p>1</p>',
+            'float'=>'<p>4.321</p>'
         ];
         $pureHtml = $purifier->clean($html);
         $this->assertEquals($expectedHtml, $pureHtml);
 
 
         //Test behavior as expected with nullPassThru Config value of true
-        $configRepo->set('purifier.passThruNullValues', true);
+        $configRepo->set('purifier.ignoreNonStrings', true);
         $purifier = new Purifier(new Filesystem(), $configRepo);
-        $this->assertEquals(true, $configRepo->get('purifier.passThruNullValues'));
+        $this->assertEquals(true, $configRepo->get('purifier.ignoreNonStrings'));
 
         $html = null;
         $pureHtml = $purifier->clean($html);
@@ -164,6 +168,8 @@ class PurifierTest extends AbstractTestCase
             'empty'=>null,
             'emptyStr'=>'',
             'bool'=>false,
+            'bool2'=>true,
+            'float'=>4.321,
         ];
         $expectedHtml = [
             'good'=>'<p><span>This is my H1 title</span></p>',
@@ -171,6 +177,8 @@ class PurifierTest extends AbstractTestCase
             'empty'=>null,
             'emptyStr'=>'',
             'bool'=>false,
+            'bool2'=>true,
+            'float'=>4.321,
         ];
         $pureHtml = $purifier->clean($html);
         $this->assertEquals($expectedHtml, $pureHtml);
