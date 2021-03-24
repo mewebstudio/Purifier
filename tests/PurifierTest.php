@@ -111,6 +111,79 @@ class PurifierTest extends AbstractTestCase
         $this->assertSame('<p><a href="https://example.com">https://example.com</a></p>', $pureHtml);
     }
 
+    public function testCleaningNullPassThru() {
+        $testConfig = require __DIR__.'/../config/purifier.php';
+        $configRepo = new Repository(['purifier'=>$testConfig]);
+
+        //$purifier = $this->app->make('purifier');
+        $purifier = new Purifier(new Filesystem(), $configRepo);
+
+        //test default config value is expected
+        $this->assertEquals(false, $configRepo->get('purifier.ignoreNonStrings'));
+
+        //Test default behavior is unchanged without nullPassThru Config value of true
+        $html = null;
+        $pureHtml = $purifier->clean($html);
+        $this->assertEquals('', $pureHtml);
+        $html = false;
+        $pureHtml = $purifier->clean($html);
+        $this->assertEquals('', $pureHtml);
+
+        $html = [
+            'good'=>'<span id="some-id">This is my H1 title',
+            'bad'=>'<script>alert(\'XSS\');</script>',
+            'empty'=>null,
+            'bool'=>false,
+            'bool2'=>true,
+            'float'=>4.321,
+        ];
+        $expectedHtml = [
+            'good'=>'<p><span>This is my H1 title</span></p>',
+            'bad'=>'',
+            'empty'=>'',
+            'bool'=>'',
+            'bool2'=>'<p>1</p>',
+            'float'=>'<p>4.321</p>'
+        ];
+        $pureHtml = $purifier->clean($html);
+        $this->assertEquals($expectedHtml, $pureHtml);
+
+
+        //Test behavior as expected with nullPassThru Config value of true
+        $configRepo->set('purifier.ignoreNonStrings', true);
+        $purifier = new Purifier(new Filesystem(), $configRepo);
+        $this->assertEquals(true, $configRepo->get('purifier.ignoreNonStrings'));
+
+        $html = null;
+        $pureHtml = $purifier->clean($html);
+        $this->assertEquals(null, $pureHtml);
+
+        $html = false;
+        $pureHtml = $purifier->clean($html);
+        $this->assertEquals(false, $pureHtml);
+
+        $html = [
+            'good'=>'<span id="some-id">This is my H1 title',
+            'bad'=>'<script>alert(\'XSS\');</script>',
+            'empty'=>null,
+            'emptyStr'=>'',
+            'bool'=>false,
+            'bool2'=>true,
+            'float'=>4.321,
+        ];
+        $expectedHtml = [
+            'good'=>'<p><span>This is my H1 title</span></p>',
+            'bad'=>'',
+            'empty'=>null,
+            'emptyStr'=>'',
+            'bool'=>false,
+            'bool2'=>true,
+            'float'=>4.321,
+        ];
+        $pureHtml = $purifier->clean($html);
+        $this->assertEquals($expectedHtml, $pureHtml);
+    }
+
     public function testCustomDefinitions()
     {
         /** @var HTMLPurifier $purifier */
