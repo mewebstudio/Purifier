@@ -7,37 +7,28 @@
 [![License](https://poser.pugx.org/mews/Purifier/license.svg)](https://packagist.org/packages/mews/Purifier)
 [![Total Downloads](https://poser.pugx.org/mews/Purifier/downloads.svg)](https://packagist.org/packages/mews/Purifier)
 
-A simple [Laravel 5 & 6](http://www.laravel.com/) service provider for including the [HTMLPurifier for Laravel](https://github.com/mewebstudio/purifier).
+A simple [Laravel](http://www.laravel.com/) service provider for easily using [HTMLPurifier](http://htmlpurifier.org/) inside Laravel. From their website:
 
-for Laravel 4 [HTMLPurifier for Laravel 4](https://github.com/mewebstudio/Purifier/tree/master-l4)
+> HTML Purifier is a standards-compliant HTML filter library written in PHP. HTML Purifier will not only remove all malicious code (better known as XSS) with a thoroughly audited, secure yet permissive whitelist, it will also make sure your documents are standards compliant, something only achievable with a comprehensive knowledge of W3C's specifications. Tired of using BBCode due to the current landscape of deficient or insecure HTML filters? Have a WYSIWYG editor but never been able to use it? Looking for high-quality, standards-compliant, open-source components for that application you're building? HTML Purifier is for you!
 
-This package can be installed via [Composer](http://getcomposer.org) by 
-requiring the `mews/purifier` package in your project's `composer.json`:
+## Installation
 
-```json
-{
-    "require": {
-        "laravel/framework": "~5.0",
-        "mews/purifier": "~3.0",
-    }
-}
-```
-
-or
+### For Laravel 5.5+
 
 Require this package with composer:
 ```
 composer require mews/purifier
 ```
 
-Update your packages with `composer update` or install with `composer install`.
+The service provider will be auto-discovered. You do not need to add the provider anywhere. 
 
-## Usage
+### For Laravel 5.0 to 5.4
 
-To use the HTMLPurifier Service Provider, you must register the provider when bootstrapping your Laravel application. There are
-essentially two ways to do this.
+Require this package with composer:
+```
+composer require mews/purifier
+```
 
-# For Laravel 5.0 to 5.4:
 Find the `providers` key in `config/app.php` and register the HTMLPurifier Service Provider.
 
 ```php
@@ -47,7 +38,7 @@ Find the `providers` key in `config/app.php` and register the HTMLPurifier Servi
     ]
 ```
 
-Find the `aliases` key in `config/app.php`.
+Find the `aliases` key in `config/app.php` and register the Purifier alias.
 
 ```php
     'aliases' => [
@@ -56,14 +47,51 @@ Find the `aliases` key in `config/app.php`.
     ]
 ```
 
-# For Laravel 5.5+: 
-The service provider will be auto-discovered. You do not need to add the provider anywhere. 
+### For Laravel 4
+
+Check out [HTMLPurifier for Laravel 4](https://github.com/mewebstudio/Purifier/tree/master-l4)
+
+
+## Usage
+
+default
+```php
+clean(Input::get('inputname'));
+```
+or
+
+```php
+Purifier::clean(Input::get('inputname'));
+```
+
+dynamic config
+```php
+clean('This is my H1 title', 'titles');
+clean('This is my H1 title', array('Attr.EnableID' => true));
+```
+or
+
+```php
+Purifier::clean('This is my H1 title', 'titles');
+Purifier::clean('This is my H1 title', array('Attr.EnableID' => true));
+```
+
+use [URI filter](http://htmlpurifier.org/docs/enduser-uri-filter.html)
+
+```php
+Purifier::clean('This is my H1 title', 'titles', function (HTMLPurifier_Config $config) {
+    $uri = $config->getDefinition('URI');
+    $uri->addFilter(new HTMLPurifier_URIFilter_NameOfFilter(), $config);
+});
+```
 
 ## Configuration
 
 To use your own settings, publish config.
 
-```$ php artisan vendor:publish --provider="Mews\Purifier\PurifierServiceProvider"```
+```
+php artisan vendor:publish --provider="Mews\Purifier\PurifierServiceProvider"
+```
 
 Config file `config/purifier.php` should like this
 
@@ -159,38 +187,20 @@ return [
 ];
 ```
 
+## Change log
 
-## Example
+Please see the [Github Releases Tab](https://github.com/mewebstudio/Purifier/releases) for more information on what has changed recently.
 
-default
-```php
-clean(Input::get('inputname'));
-```
-or
+## Security
 
-```php
-Purifier::clean(Input::get('inputname'));
-```
+If you discover any security related issues, please email [the author](mailto:me@mewebstudio.com) instead of using the issue tracker.
 
-dynamic config
-```php
-clean('This is my H1 title', 'titles');
-clean('This is my H1 title', array('Attr.EnableID' => true));
-```
-or
+## Credits
 
-```php
-Purifier::clean('This is my H1 title', 'titles');
-Purifier::clean('This is my H1 title', array('Attr.EnableID' => true));
-```
+- [HTMLPurifier.org](http://htmlpurifier.org/) - created the actual HTMLPurifier this package uses;
+- [Muharrem ERİN](https://github.com/mewebstudio) - package author and maintainer;
+- [All Contributors](https://github.com/mewebstudio/Purifier/graphs/contributors)
 
-use [URI filter](http://htmlpurifier.org/docs/enduser-uri-filter.html)
+## License
 
-```php
-Purifier::clean('This is my H1 title', 'titles', function (HTMLPurifier_Config $config) {
-    $uri = $config->getDefinition('URI');
-    $uri->addFilter(new HTMLPurifier_URIFilter_NameOfFilter(), $config);
-});
-```
-
-for Laravel 4 [HTMLPurifier for Laravel 4](https://github.com/mewebstudio/Purifier/tree/master-l4)
+MIT. Please see the [license file](https://github.com/mewebstudio/Purifier/blob/master/LICENSE) for more information.
