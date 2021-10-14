@@ -54,7 +54,9 @@ Check out [HTMLPurifier for Laravel 4](https://github.com/mewebstudio/Purifier/t
 
 ## Usage
 
-default
+
+Use these methods inside your requests or middleware, wherever you need the HTML cleaned up:
+
 ```php
 clean(Input::get('inputname'));
 ```
@@ -83,6 +85,28 @@ Purifier::clean('This is my H1 title', 'titles', function (HTMLPurifier_Config $
     $uri = $config->getDefinition('URI');
     $uri->addFilter(new HTMLPurifier_URIFilter_NameOfFilter(), $config);
 });
+```
+
+Alternatively, in Laravel 7+, if you're looking to clean your HTML inside your Eloquent models, you can use our custom casts:
+
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Mews\Purifier\Casts\CleanHtml;
+use Mews\Purifier\Casts\CleanHtmlInput;
+use Mews\Purifier\Casts\CleanHtmlOutput;
+
+class Monster extends Model
+{
+    protected $casts = [
+        'bio'            => CleanHtml::class, // cleans both when getting and setting the value
+        'description'    => CleanHtmlInput::class, // cleans when setting the value
+        'history'        => CleanHtmlOutput::class, // cleans when getting the value
+    ];
+}
 ```
 
 ## Configuration
