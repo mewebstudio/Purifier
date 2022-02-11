@@ -1,57 +1,68 @@
 {
-  "name": "mews/purifier",
-  "type": "package",
-  "description": "Laravel 5/6/7 HtmlPurifier Package",
-  "keywords": ["laravel6 HtmlPurifier", "laravel6 Purifier", "laravel6 Security", "laravel5 HtmlPurifier", "laravel5 Purifier", "laravel5 Security", "HtmlPurifier", "Purifier", "security", "xss"],
-  "homepage": "https://github.com/mewebstudio/purifier",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Muharrem ERİN",
-      "email": "me@mewebstudio.com",
-      "homepage": "https://github.com/mewebstudio",
-      "role": "Developer"
-    }
-  ],
-  "require": {
-    "php": "^7.2|^8.0",
-    "illuminate/config": "^5.8|^6.0|^7.0|^8.0",
-    "illuminate/support": "^5.8|^6.0|^7.0|^8.0",
-    "illuminate/filesystem": "^5.8|^6.0|^7.0|^8.0",
-    "ezyang/htmlpurifier": "4.13.*"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^8.0|^9.0",
-    "mockery/mockery": "^1.3.3",
-    "graham-campbell/testbench": "^3.2|^5.5.1"
-  },
-  "suggest": {
-    "laravel/framework": "To test the Laravel bindings",
-    "laravel/lumen-framework": "To test the Lumen bindings"
-  },
-  "autoload": {
-    "psr-4": {
-      "Mews\\Purifier\\": "src/"
+    "name": "mews/purifier",
+    "type": "package",
+    "description": "Laravel 5/6/7 HtmlPurifier Package",
+    "keywords": [
+        "laravel6 HtmlPurifier",
+        "laravel6 Purifier",
+        "laravel6 Security",
+        "laravel5 HtmlPurifier",
+        "laravel5 Purifier",
+        "laravel5 Security",
+        "HtmlPurifier",
+        "Purifier",
+        "security",
+        "xss"
+    ],
+    "homepage": "https://github.com/mewebstudio/purifier",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Muharrem ERİN",
+            "email": "me@mewebstudio.com",
+            "homepage": "https://github.com/mewebstudio",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2|^8.0",
+        "illuminate/config": "^5.8|^6.0|^7.0|^8.0|^9.0",
+        "illuminate/support": "^5.8|^6.0|^7.0|^8.0|^9.0",
+        "illuminate/filesystem": "^5.8|^6.0|^7.0|^8.0|^9.0",
+        "ezyang/htmlpurifier": "4.13.*"
     },
-    "files": [
-      "src/helpers.php"
-    ]
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Mews\\Tests\\Purifier\\": "tests/"
-    }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-          "Mews\\Purifier\\PurifierServiceProvider"
-      ],
-      "aliases": {
-          "Purifier": "Mews\\Purifier\\Facades\\Purifier"
-      }
-    }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    "require-dev": {
+        "phpunit/phpunit": "^8.0|^9.0",
+        "mockery/mockery": "^1.3.3",
+        "graham-campbell/testbench": "^3.2|^5.5.1"
+    },
+    "suggest": {
+        "laravel/framework": "To test the Laravel bindings",
+        "laravel/lumen-framework": "To test the Lumen bindings"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mews\\Purifier\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mews\\Tests\\Purifier\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mews\\Purifier\\PurifierServiceProvider"
+            ],
+            "aliases": {
+                "Purifier": "Mews\\Purifier\\Facades\\Purifier"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
