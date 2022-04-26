@@ -33,6 +33,6 @@ class CleanHtml implements CastsAttributes
      */
     public function set($model, $key, $value, $attributes)
     {
-        return clean($value);
+        return clean($value, $this->config);
     }
 }
