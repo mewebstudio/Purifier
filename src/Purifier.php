@@ -143,7 +143,11 @@ class Purifier
                 }
 
                 continue;
-            }
+	    }
+
+	    if (class_exists($validValues)) {
+		$validValues = new $validValues();
+	    }
 
             $definition->addAttribute($onElement, $attrName, $validValues);
         }
