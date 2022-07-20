@@ -6,6 +6,8 @@ use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
 class CleanHtmlInput implements CastsAttributes
 {
+    use WithConfig;
+
     /**
      * Cast the given value. Does not clean the HTML.
      *
@@ -31,6 +33,6 @@ class CleanHtmlInput implements CastsAttributes
      */
     public function set($model, $key, $value, $attributes)
     {
-        return clean($value);
+        return clean($value, $this->config);
     }
 }

@@ -6,6 +6,8 @@ use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
 class CleanHtmlOutput implements CastsAttributes
 {
+    use WithConfig;
+
     /**
      * Clean the HTML when casting the given value.
      *
@@ -17,7 +19,7 @@ class CleanHtmlOutput implements CastsAttributes
      */
     public function get($model, $key, $value, $attributes)
     {
-        return clean($value);
+        return clean($value, $this->config);
     }
 
     /**
