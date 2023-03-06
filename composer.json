@@ -18,12 +18,12 @@
     "illuminate/config": "^5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
     "illuminate/support": "^5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
     "illuminate/filesystem": "^5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
-    "ezyang/htmlpurifier": "^4.16.*"
+    "ezyang/htmlpurifier": "^4.16"
   },
   "require-dev": {
     "phpunit/phpunit": "^8.0|^9.0|^10.0",
-    "mockery/mockery": "^1.3.3",
-    "graham-campbell/testbench": "^3.2|^5.5.1"
+    "mockery/mockery": "^1.4.4",
+    "graham-campbell/testbench": "^3.2|^5.5.1|^6.0.0"
   },
   "suggest": {
     "laravel/framework": "To test the Laravel bindings",
