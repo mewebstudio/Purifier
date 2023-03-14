@@ -14,7 +14,7 @@ abstract class AbstractTestCase extends AbstractPackageTestCase
      *
      * @return string
      */
-    protected function getServiceProviderClass($app)
+    protected function getServiceProviderClass()
     {
         return PurifierServiceProvider::class;
     }
