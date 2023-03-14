@@ -1,4 +1,4 @@
-# HTMLPurifier for Laravel 5/6/7/8/9
+# HTMLPurifier for Laravel 5/6/7/8/9/10
 
 [![Build Status](https://travis-ci.org/mewebstudio/Purifier.svg?branch=master)](https://travis-ci.org/github/mewebstudio/Purifier)
 [![codecov](https://codecov.io/gh/mewebstudio/Purifier/branch/master/graph/badge.svg)](https://codecov.io/gh/mewebstudio/Purifier)
