@@ -194,7 +194,7 @@ class Purifier
                 $this->config->get('purifier.cacheFileMode', 0755),
                 true,
                 true
-	    );
+            );
         }
     }
 
