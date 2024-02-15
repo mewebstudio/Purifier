@@ -190,10 +190,10 @@ class Purifier
 
         if ($cachePath) {
             $this->files->makeDirectory(
-		$cachePath,
-		$this->config->get('purifier.cacheFileMode', 0755),
-		true,
-	    	true
+                $cachePath,
+                $this->config->get('purifier.cacheFileMode', 0755),
+                true,
+                true
 	    );
         }
     }
