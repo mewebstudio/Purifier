@@ -199,7 +199,7 @@ class Purifier
     }
 
     /**
-     * @param null $config
+     * @param array<string, mixed>|string|null $config
      *
      * @return mixed|null
      */
@@ -259,7 +259,7 @@ class Purifier
 
     /**
      * @param      $dirty
-     * @param null $config
+     * @param array<string, mixed>|string|null $config
      * @param \Closure|null $postCreateConfigHook
      * @return mixed
      */
