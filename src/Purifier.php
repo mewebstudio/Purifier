@@ -83,7 +83,7 @@ class Purifier
      *
      * @return HTMLPurifier_Config $configObject
      */
-    private function addCustomDefinition(array $definitionConfig, HTMLPurifier_Config $configObject = null)
+    private function addCustomDefinition(array $definitionConfig, ?HTMLPurifier_Config $configObject = null)
     {
         if (!$configObject) {
             $configObject = HTMLPurifier_Config::createDefault();
@@ -263,7 +263,7 @@ class Purifier
      * @param \Closure|null $postCreateConfigHook
      * @return mixed
      */
-    public function clean($dirty, $config = null, \Closure $postCreateConfigHook = null)
+    public function clean($dirty, $config = null, ?\Closure $postCreateConfigHook = null)
     {
         if (is_array($dirty)) {
             return array_map(function ($item) use ($config) {
